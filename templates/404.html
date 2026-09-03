@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% from 'includes/icons.html' import icon %}
+{% block inhalt %}
+<section class="seitenkopf">
+  <div class="wrap">
+    <p class="eyebrow">Fehler 404</p>
+    <h1>Diese Seite gibt es nicht.</h1>
+    <p class="lead">Vielleicht ist der Link alt oder vertippt. Das Wichtigste finden Sie hier:</p>
+    <div class="knoepfe">
+      <a class="knopf" href="{{ url('') }}">Zur Startseite {{ icon('pfeil') }}</a>
+      <a class="knopf knopf--hell" href="{{ url('leistungen/') }}">Leistungen</a>
+      <a class="knopf knopf--hell" href="{{ url('kontakt/') }}">Kontakt</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block inhalt %}
+<section class="seitenkopf">
+  <div class="wrap">
+    <p class="eyebrow">Rechtliches</p>
+    <h1>Datenschutzerklärung</h1>
+    <p class="lead">Kurz gesagt: Diese Seite setzt keine Cookies, nutzt keine Analyse-Dienste und lädt nichts von Dritten nach. Daten fallen nur an, wenn Sie uns anrufen, schreiben oder die Seite aufrufen.</p>
+  </div>
+</section>
+<section class="band band--knapp">
+  <div class="wrap text">
+    <h2>1. Verantwortlicher</h2>
+    <p>{{ firma.name }} {{ firma.zusatz }}, Inhaber {{ firma.inhaber }}<br>
+    {{ firma.strasse }}, {{ firma.plz }} {{ firma.ort }}<br>
+    Telefon <a href="tel:{{ firma.telefon_link }}">{{ firma.telefon }}</a>, E-Mail <a href="mailto:{{ firma.email }}">{{ firma.email }}</a></p>
+
+    <h2>2. Hosting und Server-Protokolle</h2>
+    <p>Diese Website wird als statische Seite über GitHub Pages bereitgestellt, einen Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. Beim Aufruf der Seite verarbeitet GitHub technisch notwendige Daten: IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browsertyp und Betriebssystem. GitHub speichert diese Daten in Server-Protokollen, um den Dienst sicher und stabil zu betreiben.</p>
+    <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der sicheren und wirtschaftlichen Bereitstellung der Website. Da GitHub in den USA sitzt, kann es zu einer Übermittlung in ein Drittland kommen. GitHub stützt diese Übermittlung auf Standardvertragsklauseln der EU-Kommission nach Art. 46 Abs. 2 lit. c DSGVO. Näheres in der <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener" target="_blank">Datenschutzerklärung von GitHub</a>.</p>
+    <p>Wir selbst haben keinen Zugriff auf diese Protokolle und führen keine eigene Reichweitenmessung durch.</p>
+
+    <h2>3. Keine Cookies, keine Analyse, keine externen Inhalte</h2>
+    <p>Diese Seite setzt keine Cookies und verwendet keine Tracking- oder Analysewerkzeuge. Schriften, Bilder und Skripte liegen auf demselben Server wie die Seite. Es werden keine Karten, Videos oder Schriften von Drittanbietern eingebunden.</p>
+
+    <h2>4. Kontaktaufnahme</h2>
+    <p>Wenn Sie uns per Telefon, E-Mail oder WhatsApp kontaktieren, verarbeiten wir die Daten, die Sie uns dabei mitteilen (zum Beispiel Name, Telefonnummer, Adresse der Baustelle, Fotos), um Ihre Anfrage zu bearbeiten und ein Angebot zu erstellen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) oder, bei allgemeinen Anfragen, Art. 6 Abs. 1 lit. f DSGVO.</p>
+    <p>Wir löschen die Daten, wenn Ihre Anfrage erledigt ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen. Kommt ein Auftrag zustande, bewahren wir die Unterlagen entsprechend den handels- und steuerrechtlichen Fristen auf.</p>
+
+    <h2>5. WhatsApp</h2>
+    <p>Auf dieser Seite gibt es Links, die einen Chat mit uns in WhatsApp öffnen. Erst wenn Sie einen solchen Link anklicken, verarbeitet WhatsApp Ireland Limited, 4 Grand Canal Square, Dublin 2, Irland, Ihre Daten nach seinen eigenen Bedingungen. Wir nutzen WhatsApp ausschließlich zur Kommunikation mit Ihnen und übertragen keine Kontaktdaten Dritter. Informationen zum Datenschutz bei WhatsApp finden Sie unter <a href="https://www.whatsapp.com/legal/privacy-policy-eea" rel="noopener" target="_blank">whatsapp.com/legal/privacy-policy-eea</a>. Wenn Sie WhatsApp nicht nutzen möchten, erreichen Sie uns genauso gut per Telefon oder E-Mail.</p>
+
+    <h2>6. Externe Links</h2>
+    <p>Der Link zur Routenplanung führt zu Google Maps (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland). Auf unserer Seite ist keine Karte eingebettet. Daten werden erst übertragen, wenn Sie den Link anklicken und die Seite von Google aufrufen.</p>
+
+    <h2>7. Ihre Rechte</h2>
+    <p>Sie haben das Recht auf Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO), auf Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch gegen eine Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (Art. 21). Wenden Sie sich dafür an die oben genannten Kontaktdaten.</p>
+    <p>Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren. Zuständig für uns ist der Hessische Beauftragte für Datenschutz und Informationsfreiheit, Postfach 3163, 65021 Wiesbaden.</p>
+
+    <h2>8. Stand</h2>
+    <p>Diese Datenschutzerklärung gilt ab September 2026. Wenn sich an der Seite technisch etwas ändert, passen wir sie an.</p>
+  </div>
+</section>
+{% endblock %}

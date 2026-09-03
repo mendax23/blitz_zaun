@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block inhalt %}
+<section class="seitenkopf">
+  <div class="wrap">
+    <p class="eyebrow">Rechtliches</p>
+    <h1>Impressum</h1>
+  </div>
+</section>
+<section class="band band--knapp">
+  <div class="wrap text">
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <p>{{ firma.name }} {{ firma.zusatz }}<br>
+    Inhaber: {{ firma.inhaber }}<br>
+    {{ firma.strasse }}<br>
+    {{ firma.plz }} {{ firma.ort }}</p>
+
+    <h2>Kontakt</h2>
+    <p>Telefon: <a href="tel:{{ firma.telefon_link }}">{{ firma.telefon }}</a><br>
+    Mobil: <a href="tel:{{ firma.mobil_link }}">{{ firma.mobil }}</a><br>
+    Fax: {{ firma.fax }}<br>
+    E-Mail: <a href="mailto:{{ firma.email }}">{{ firma.email }}</a></p>
+
+    <h2>Steuernummer</h2>
+    <p>{{ firma.steuernummer }}, {{ firma.finanzamt }}</p>
+
+    <h2>Verantwortlich für den Inhalt</h2>
+    <p>{{ firma.inhaber }}, Anschrift wie oben.</p>
+
+    <h2>Bildnachweis</h2>
+    <p>Fotografie: Studio Seikel, Hanau. Logo: Hilfreich &amp; Edel, Hanau. Alle Fotos zeigen eigene Baustellen und Fahrzeuge von {{ firma.name }}.</p>
+
+    <h2>Haftung für Inhalte</h2>
+    <p>Die Inhalte dieser Seite haben wir mit Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität können wir dennoch keine Gewähr übernehmen. Als Diensteanbieter sind wir für eigene Inhalte nach den allgemeinen Gesetzen verantwortlich.</p>
+
+    <h2>Haftung für Links</h2>
+    <p>Diese Seite enthält Links zu externen Websites (Google Maps, WhatsApp), auf deren Inhalte wir keinen Einfluss haben. Für diese Inhalte ist der jeweilige Anbieter verantwortlich. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar.</p>
+
+    <h2>Urheberrecht</h2>
+    <p>Texte, Fotos und Gestaltung dieser Seite sind urheberrechtlich geschützt. Vervielfältigung oder Verwendung außerhalb der Grenzen des Urheberrechts bedarf der schriftlichen Zustimmung von {{ firma.name }} beziehungsweise der genannten Urheber.</p>
+
+    <h2>Verbraucherstreitbeilegung</h2>
+    <p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+  </div>
+</section>
+{% endblock %}
