@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% from 'includes/icons.html' import icon %}
+{% block titel %}{{ firma.name }} {{ firma.ort }}: Zaunbau, Pflaster und Erdarbeiten{% endblock %}
+{% block body_klasse %}start{% endblock %}
+{% block inhalt %}
+{% set hero = masse.get('hero_start-1400.webp', [1400, 1750]) %}
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">{{ firma.zusatz }} · {{ firma.ort }}</p>
+    <h1>Zäune, Pflaster und Erdarbeiten. <span class="marker">Blitzschnell</span> im Einsatz.</h1>
+    <p class="lead">{{ firma.name }} baut Zäune, pflastert Einfahrten und Terrassen und übernimmt Erd-, Bagger- und Kanalarbeiten. Mit eigenen Baggern und LKW, als Familienbetrieb aus {{ firma.ort }} für {{ orte[1] }} und den {{ region }}.</p>
+    {% include 'includes/kontaktknoepfe.html' %}
+    <ul class="fakten">
+      <li>{{ icon('check') }}Eigene Bagger und LKW</li>
+      <li>{{ icon('check') }}Schriftliches Angebot nach Besichtigung</li>
+      <li>{{ icon('check') }}Ein Ansprechpartner von Anfang bis Abnahme</li>
+    </ul>
+  </div>
+  <div class="hero-bild">
+    <img src="{{ asset('img/hero_start-1400.webp') }}" srcset="{{ asset('img/hero_start-800.webp') }} 800w, {{ asset('img/hero_start-1400.webp') }} 1400w" sizes="(min-width: 900px) 50vw, 100vw" width="{{ hero[0] }}" height="{{ hero[1] }}" alt="Doppelstabmattenzaun in Anthrazit, den BLITZ-ZAUN entlang eines Rapsfelds gesetzt hat" fetchpriority="high">
+  </div>
+</section>
+
+<section class="band band--grau" aria-labelledby="leistungen-titel">
+  <div class="wrap">
+    <div class="band-kopf">
+      <p class="eyebrow">Leistungen</p>
+      <h2 id="leistungen-titel">Alles rund um Grundstück und Garten. Aus einer Hand.</h2>
+      <p class="lead">Vierzehn Leistungen in fünf Bereichen. Sie brauchen keinen zweiten Betrieb, der den Aushub abfährt oder die L-Steine setzt.</p>
+    </div>
+    <div class="karten karten--5">
+      {% for g in gruppen %}
+      {% set m = masse.get('gruppen/' ~ g.slug ~ '.webp', [800, 533]) %}
+      <a class="karte karte--link{% if loop.first %} karte--breit{% endif %}" href="{{ url('leistungen/') }}#{{ g.slug }}">
+        <img src="{{ asset('img/gruppen/' ~ g.slug ~ '.webp') }}" width="{{ m[0] }}" height="{{ m[1] }}" alt="" loading="lazy">
+        <div class="karte-text">
+          <h3>{{ g.titel }}</h3>
+          <p>{{ g.kurz }}</p>
+          <ul class="tags">{% for l in g.leistungen %}<li>{{ l.name }}</li>{% endfor %}</ul>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <p class="band-fuss"><a class="knopf knopf--hell" href="{{ url('leistungen/') }}">Alle Leistungen im Detail {{ icon('pfeil') }}</a></p>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="ablauf-titel">
+  <div class="wrap">
+    <div class="band-kopf">
+      <p class="eyebrow">So läuft es ab</p>
+      <h2 id="ablauf-titel">Vom Anruf bis zur Abnahme.</h2>
+    </div>
+    <ol class="schritte">
+      {% for s in ablauf %}
+      <li class="schritt">
+        <span class="schritt-nr" aria-hidden="true">{{ loop.index }}</span>
+        <h3>{{ s.titel }}</h3>
+        <p>{{ s.text }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="band band--dunkel" aria-labelledby="fuhrpark-titel">
+  <div class="wrap">
+    <div class="band-kopf band-kopf--zweispaltig">
+      <div>
+        <p class="eyebrow eyebrow--hell">Eigener Fuhrpark</p>
+        <h2 id="fuhrpark-titel">Drei Bagger, drei LKW, ein Team.</h2>
+      </div>
+      <p class="lead">Wir warten nicht auf Mietmaschinen oder Subunternehmer. Aushub, Material und Container fahren wir selbst. Deshalb können wir Termine nennen und halten.</p>
+    </div>
+    <ul class="maschinen">
+      {% for f in fuhrpark %}
+      <li>
+        <img src="{{ asset('img/fuhrpark/' ~ f.bild ~ '.webp') }}" width="300" height="300" alt="{{ f.name }} von BLITZ-ZAUN" loading="lazy">
+        <span>{{ f.name }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="band-fuss"><a class="textlink textlink--hell" href="{{ url('ueber-uns/') }}">Mehr über Team und Maschinen {{ icon('pfeil') }}</a></p>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="galerie-titel">
+  <div class="wrap">
+    <div class="band-kopf">
+      <p class="eyebrow">Galerie</p>
+      <h2 id="galerie-titel">Baustellen, wie sie wirklich aussehen.</h2>
+      <p class="lead">Keine Katalogbilder. Fotos von unseren Zäunen, Pflasterflächen und Erdarbeiten in der Region.</p>
+    </div>
+    <div class="raster raster--6">
+      {% for b in galerie[:6] %}
+      {% set m = masse.get('galerie/' ~ b.id ~ '-640.webp', [640, 480]) %}
+      <a class="raster-bild" href="{{ url('galerie/') }}#bild-{{ b.id }}">
+        <img src="{{ asset('img/galerie/' ~ b.id ~ '-640.webp') }}" width="{{ m[0] }}" height="{{ m[1] }}" alt="{{ b.alt }}" loading="lazy">
+      </a>
+      {% endfor %}
+    </div>
+    <p class="band-fuss"><a class="knopf knopf--hell" href="{{ url('galerie/') }}">Alle Fotos ansehen {{ icon('pfeil') }}</a></p>
+  </div>
+</section>
+
+<section class="band band--grau" aria-labelledby="gebiet-titel">
+  <div class="wrap gebiet">
+    <div>
+      <p class="eyebrow">Einzugsgebiet</p>
+      <h2 id="gebiet-titel">Wir kommen aus {{ firma.ort }}. Und zu Ihnen.</h2>
+      <p class="lead">Kurze Anfahrt heißt: Wir sind schnell zur Besichtigung da und fahren Material ohne Umweg zur Baustelle.</p>
+      <p>Ihr Ort ist nicht dabei? Fragen Sie trotzdem. Meist geht es.</p>
+    </div>
+    <ul class="chips" aria-label="Orte im Einzugsgebiet">
+      {% for o in orte %}<li class="chip{% if loop.first %} chip--aktiv{% endif %}">{{ icon('pin') }}{{ o }}</li>{% endfor %}
+      <li class="chip chip--leise">{{ region }}</li>
+    </ul>
+  </div>
+</section>
+
+{% include 'includes/cta.html' %}
+{% endblock %}
