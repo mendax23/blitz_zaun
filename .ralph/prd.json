@@ -1,0 +1,138 @@
+{
+  "projekt": "blitz-zaun.de – statische Firmenwebsite für BLITZ-ZAUN Garten- und Landschaftsbau, Erlensee",
+  "stories": [
+    {
+      "id": "S1",
+      "title": "Grundgerüst und Deploy-Pipeline",
+      "tasks": [
+        {
+          "id": "T1",
+          "title": "Build-Skript, Basistemplate, Firmendaten, Prüfskript",
+          "acceptanceCriteria": [
+            "build.py rendert Jinja2-Templates aus templates/ nach dist/ und kopiert static/",
+            "inhalt/daten.py hält Firmendaten (NAP), Leistungen, Einzugsgebiet an einer Stelle",
+            "base.html mit Header, Navigation, Footer, Meta-Tags, url()-Helfer für BASE_PATH",
+            "pruefen.py prüft: interne Links existieren, keine Template-Reste, keine Platzhalter"
+          ],
+          "verify": [
+            "python3 build.py",
+            "python3 pruefen.py"
+          ],
+          "passes": true
+        },
+        {
+          "id": "T2",
+          "title": "Design-System und Startseite",
+          "acceptanceCriteria": [
+            "style.css mit CSS-Variablen aus Logo-Farben (Grün, Anthrazit), Jost + Inter selbst gehostet",
+            "Startseite: Hero mit Foto, Leistungsgruppen, Ablauf, Fuhrpark-Block, Galerie-Auszug, Einzugsgebiet, Kontakt-Sektion",
+            "Responsiv ab 320px, sichtbarer Fokus, prefers-reduced-motion beachtet"
+          ],
+          "verify": [
+            "python3 build.py",
+            "python3 pruefen.py"
+          ],
+          "passes": true
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "Inhalte",
+      "tasks": [
+        {
+          "id": "T3",
+          "title": "Bilder importieren und optimieren",
+          "acceptanceCriteria": [
+            "bilder_import.py wandelt Originale aus bilder/original/ in WebP (Galerie 1600 und 640 px, Fuhrpark, Team, Logo) nach static/img/",
+            "Originale sind gitignored, die URL-Liste der Jimdo-Quellen liegt bei",
+            "inhalt/daten.py enthält Galerie mit Kategorie und Alt-Text je Bild"
+          ],
+          "verify": [
+            "python3 build.py",
+            "python3 pruefen.py"
+          ],
+          "passes": true
+        },
+        {
+          "id": "T4",
+          "title": "Leistungen-Seite und Zaunbau-Unterseite",
+          "acceptanceCriteria": [
+            "leistungen/ zeigt 14 Leistungen in 5 Gruppen mit je 2–3 Sätzen, Anker je Gruppe",
+            "leistungen/zaunbau/ als eigene Seite mit Ablauf, Materialien, FAQ, Fotos",
+            "Sie-Form, keine erfundenen Zahlen, keine Festpreise"
+          ],
+          "verify": [
+            "python3 build.py",
+            "python3 pruefen.py"
+          ],
+          "passes": true
+        },
+        {
+          "id": "T5",
+          "title": "Galerie, Über uns, Kontakt",
+          "acceptanceCriteria": [
+            "galerie/ mit Kategorie-Filter und Lightbox ohne externe Bibliothek",
+            "ueber-uns/ mit Team (Inhaber, Projektleitung) und Fuhrpark (3 Bagger, 3 LKW)",
+            "kontakt/ mit Anruf-, WhatsApp- und E-Mail-Knopf, Adresse, Anfahrt-Link, ohne Formular"
+          ],
+          "verify": [
+            "python3 build.py",
+            "python3 pruefen.py"
+          ],
+          "passes": true
+        },
+        {
+          "id": "T6",
+          "title": "Impressum, Datenschutz, 404",
+          "acceptanceCriteria": [
+            "Impressum mit Daten der bisherigen Seite plus Bildnachweis Studio Seikel",
+            "Datenschutz passend zu statischem Hosting auf GitHub Pages ohne Cookies und Formular",
+            "404.html im Seitendesign"
+          ],
+          "verify": [
+            "python3 build.py",
+            "python3 pruefen.py"
+          ],
+          "passes": true
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "SEO und Livegang",
+      "tasks": [
+        {
+          "id": "T7",
+          "title": "SEO-Grundlagen",
+          "acceptanceCriteria": [
+            "LocalBusiness-JSON-LD auf jeder Seite, Service- und FAQPage-JSON-LD auf Zaunbau",
+            "sitemap.xml, robots.txt, Canonicals, Open Graph mit OG-Bild",
+            "Im Vorschau-Modus (BLITZ_PREVIEW=1) noindex und robots Disallow",
+            "pruefen.py prüft JSON-LD als gültiges JSON und Sitemap gegen dist/"
+          ],
+          "verify": [
+            "python3 build.py",
+            "python3 pruefen.py"
+          ],
+          "passes": true
+        },
+        {
+          "id": "T8",
+          "title": "GitHub-Repo, Actions-Deploy auf GitHub Pages, Doku",
+          "acceptanceCriteria": [
+            "Workflow: Push auf master → pruefen.py → Build → Deploy auf GitHub Pages",
+            "Repo mendax23/blitz_zaun angelegt, Pages auf Actions-Quelle umgestellt, Vorschau erreichbar",
+            "README.md (Aufbau, Pflege, Domain-Umzug) und ZUGANGSDATEN.md (offene Punkte beim Kunden, keine Passwörter)"
+          ],
+          "verify": [
+            "python3 build.py",
+            "python3 pruefen.py",
+            "test -f .github/workflows/deploy.yml"
+          ],
+          "passes": false
+        }
+      ]
+    }
+  ]
+}

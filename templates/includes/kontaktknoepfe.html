@@ -1,0 +1,6 @@
+{% from 'includes/icons.html' import icon %}
+{# Anruf und WhatsApp – die zwei Wege, die auf dieser Seite zählen #}
+<div class="knoepfe">
+  <a class="knopf" href="tel:{{ firma.telefon_link }}">{{ icon('telefon') }}<span>{{ firma.telefon }} anrufen</span></a>
+  <a class="knopf knopf--whatsapp" href="https://wa.me/{{ firma.whatsapp }}" target="_blank" rel="noopener">{{ icon('whatsapp') }}<span>Per WhatsApp schreiben</span></a>
+</div>

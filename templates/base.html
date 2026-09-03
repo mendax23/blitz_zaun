@@ -1,0 +1,118 @@
+{% from 'includes/icons.html' import icon %}
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block titel %}{{ seite.titel }} | {{ firma.name }}{% endblock %}</title>
+<meta name="description" content="{{ seite.beschreibung }}">
+{% if preview or seite.noindex %}<meta name="robots" content="noindex, nofollow">{% endif %}
+{% if not seite.datei %}<link rel="canonical" href="{{ absolut(seite.pfad) }}">{% endif %}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ firma.name }} {{ firma.zusatz }}">
+<meta property="og:title" content="{{ seite.titel }}">
+<meta property="og:description" content="{{ seite.beschreibung }}">
+<meta property="og:url" content="{{ absolut(seite.pfad if not seite.datei else '') }}">
+<meta property="og:image" content="{{ site_url }}{{ asset('img/og.jpg') }}">
+<meta property="og:locale" content="de_DE">
+<meta name="theme-color" content="#46a524">
+<link rel="icon" href="{{ asset('img/favicon.svg') }}" type="image/svg+xml">
+<link rel="preload" href="{{ asset('fonts/jost-600-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ asset('fonts/inter-400-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+  "@id": site_url ~ url('') ~ "#firma",
+  "name": firma.name,
+  "alternateName": firma.name ~ " " ~ firma.zusatz,
+  "description": "Garten- und Landschaftsbau aus Erlensee: Zaunbau, L-Steine, Pflaster, Terrassen, Erd- und Baggerarbeiten, Kanal, Zisterne, Abbruch, Container, Rollrasen.",
+  "url": site_url ~ url(''),
+  "telephone": firma.telefon_link,
+  "email": firma.email,
+  "image": site_url ~ asset('img/og.jpg'),
+  "logo": site_url ~ asset('img/logo.png'),
+  "founder": {"@type": "Person", "name": firma.inhaber},
+  "address": {"@type": "PostalAddress", "streetAddress": firma.strasse, "postalCode": firma.plz, "addressLocality": firma.ort, "addressRegion": "Hessen", "addressCountry": "DE"},
+  "areaServed": orte_ld,
+  "priceRange": "Angebot nach Besichtigung",
+  "knowsAbout": ["Zaunbau", "Doppelstabmattenzaun", "Pflasterarbeiten", "Erdarbeiten", "Baggerarbeiten", "L-Steine", "Kanalbau", "Zisterne", "Abbruch", "Containerdienst", "Rollrasen"]
+} | tojson_ld }}
+</script>
+{% block kopf_extra %}{% endblock %}
+</head>
+<body class="{% block body_klasse %}{% endblock %}">
+<a class="skip" href="#inhalt">Zum Inhalt springen</a>
+<header class="kopf">
+  <div class="wrap kopf-inner">
+    <a class="logo" href="{{ url('') }}" aria-label="{{ firma.name }} – zur Startseite">
+      <img src="{{ asset('img/logo.png') }}" alt="{{ firma.name }} – {{ firma.zusatz }}, {{ firma.inhaber }}" width="{{ masse.get('logo.png', [1200, 246])[0] }}" height="{{ masse.get('logo.png', [1200, 246])[1] }}">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="hauptnav">{{ icon('menu', 'icon icon--menu') }}{{ icon('x', 'icon icon--x') }}<span>Menü</span></button>
+    <nav class="nav" id="hauptnav" aria-label="Hauptnavigation">
+      <ul>
+        {% for eintrag in [('leistungen/', 'Leistungen'), ('galerie/', 'Galerie'), ('ueber-uns/', 'Über uns'), ('kontakt/', 'Kontakt')] %}
+        <li><a href="{{ url(eintrag[0]) }}"{% if seite.pfad == eintrag[0] or (eintrag[0] == 'leistungen/' and seite.pfad.startswith('leistungen/')) %} aria-current="page"{% endif %}>{{ eintrag[1] }}</a></li>
+        {% endfor %}
+      </ul>
+      <a class="knopf knopf--klein kopf-telefon" href="tel:{{ firma.telefon_link }}">{{ icon('telefon') }}<span>{{ firma.telefon }}</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="inhalt">
+{% block inhalt %}{% endblock %}
+</main>
+
+<footer class="fuss">
+  <div class="wrap fuss-inner">
+    <div class="fuss-firma">
+      <p class="fuss-marke">{{ icon('blitz', 'icon icon--blitz') }} {{ firma.name }}</p>
+      <p>{{ firma.zusatz }}<br>{{ firma.inhaber }}</p>
+      <address>{{ firma.strasse }}<br>{{ firma.plz }} {{ firma.ort }}</address>
+      <p class="fuss-orte">Für {{ orte[:6] | join(', ') }} und den {{ region }}.</p>
+    </div>
+    <div>
+      <p class="fuss-titel">Leistungen</p>
+      <ul>
+        {% for g in gruppen %}<li><a href="{{ url('leistungen/') }}#{{ g.slug }}">{{ g.titel }}</a></li>{% endfor %}
+        <li><a href="{{ url('leistungen/zaunbau/') }}">Zaunbau im Detail</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="fuss-titel">Seiten</p>
+      <ul>
+        <li><a href="{{ url('') }}">Start</a></li>
+        <li><a href="{{ url('galerie/') }}">Galerie</a></li>
+        <li><a href="{{ url('ueber-uns/') }}">Über uns</a></li>
+        <li><a href="{{ url('kontakt/') }}">Kontakt</a></li>
+        <li><a href="{{ url('impressum/') }}">Impressum</a></li>
+        <li><a href="{{ url('datenschutz/') }}">Datenschutz</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="fuss-titel">Kontakt</p>
+      <ul class="fuss-kontakt">
+        <li><a href="tel:{{ firma.telefon_link }}">{{ icon('telefon') }}<span>{{ firma.telefon }}</span></a></li>
+        <li><a href="tel:{{ firma.mobil_link }}">{{ icon('telefon') }}<span>{{ firma.mobil }} (mobil)</span></a></li>
+        <li><a href="https://wa.me/{{ firma.whatsapp }}" target="_blank" rel="noopener">{{ icon('whatsapp') }}<span>WhatsApp</span></a></li>
+        <li><a href="mailto:{{ firma.email }}">{{ icon('mail') }}<span>{{ firma.email }}</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap fuss-unten">
+    <p>© {{ jahr }} {{ firma.name }} · {{ firma.inhaber }} · {{ firma.ort }}</p>
+    <p><a href="{{ url('impressum/') }}">Impressum</a> · <a href="{{ url('datenschutz/') }}">Datenschutz</a></p>
+  </div>
+</footer>
+
+<div class="aktionsleiste" aria-label="Schnellkontakt">
+  <a href="tel:{{ firma.telefon_link }}">{{ icon('telefon') }}<span>Anrufen</span></a>
+  <a href="https://wa.me/{{ firma.whatsapp }}" target="_blank" rel="noopener">{{ icon('whatsapp') }}<span>WhatsApp</span></a>
+</div>
+
+<script src="{{ asset('js/main.js') }}" defer></script>
+{% block fuss_extra %}{% endblock %}
+</body>
+</html>

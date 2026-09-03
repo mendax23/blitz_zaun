@@ -1,0 +1,15 @@
+{% from 'includes/icons.html' import icon %}
+<section class="band band--dunkel cta" aria-labelledby="cta-titel">
+  <div class="wrap cta-inner">
+    <div>
+      <p class="eyebrow eyebrow--hell">Anfrage</p>
+      <h2 id="cta-titel">Sagen Sie uns, was ansteht.</h2>
+      <p class="lead">Ein Anruf oder eine WhatsApp mit ein, zwei Fotos vom Grundstück reicht. Wir melden uns und kommen zur Besichtigung nach {{ firma.ort }}, {{ orte[1] }} oder wo immer Sie bauen.</p>
+    </div>
+    <div class="cta-kontakt">
+      <a class="knopf knopf--hell" href="tel:{{ firma.telefon_link }}">{{ icon('telefon') }}<span>{{ firma.telefon }}</span></a>
+      <a class="knopf knopf--whatsapp" href="https://wa.me/{{ firma.whatsapp }}" target="_blank" rel="noopener">{{ icon('whatsapp') }}<span>WhatsApp {{ firma.mobil }}</span></a>
+      <a class="textlink textlink--hell" href="mailto:{{ firma.email }}">{{ icon('mail') }}<span>{{ firma.email }}</span></a>
+    </div>
+  </div>
+</section>

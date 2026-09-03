@@ -1,0 +1,11 @@
+# Build-Ausgabe
+dist/
+# Original-Fotos (gross, liegen lokal und bei Jimdo, siehe bilder/jimdo_quellen.txt)
+bilder/original/
+# Python
+__pycache__/
+*.pyc
+.venv/
+# Editor / System
+.DS_Store
+*.swp
