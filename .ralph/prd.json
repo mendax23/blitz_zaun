@@ -130,7 +130,7 @@
             "python3 pruefen.py",
             "test -f .github/workflows/deploy.yml"
           ],
-          "passes": false
+          "passes": true
         }
       ]
     }
