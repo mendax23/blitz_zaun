@@ -1,0 +1,60 @@
+name: Prüfen, bauen, auf GitHub Pages veröffentlichen
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+# Vorschau-Modus, solange blitz-zaun.de noch auf Strato/Jimdo zeigt:
+# Seite liegt unter https://mendax23.github.io/blitz_zaun/, noindex, robots sperrt.
+# Für den Livegang die drei Variablen unten austauschen (siehe README, Abschnitt Domain-Umzug).
+env:
+  BLITZ_SITE_URL: https://mendax23.github.io
+  BLITZ_BASE_PATH: /blitz_zaun
+  BLITZ_PREVIEW: "1"
+  # Livegang:
+  # BLITZ_SITE_URL: https://blitz-zaun.de
+  # BLITZ_BASE_PATH: ""
+  # BLITZ_PREVIEW: "0"
+  # BLITZ_DOMAIN: blitz-zaun.de
+
+jobs:
+  bauen:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Abhängigkeiten
+        run: pip install -r requirements.txt
+      - name: Bauen
+        run: python build.py
+      - name: Prüfen
+        run: python pruefen.py
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  veroeffentlichen:
+    needs: bauen
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
