@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% from 'includes/icons.html' import icon %}
+{% block kopf_extra %}
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Zaunbau",
+  "serviceType": "Zaunbau, Doppelstabmattenzaun, Tore, Zaun auf L-Steinen",
+  "provider": {"@id": site_url ~ url('') ~ "#firma"},
+  "areaServed": orte_ld,
+  "url": absolut(seite.pfad),
+  "description": seite.beschreibung
+} | tojson_ld }}
+</script>
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq_ld
+} | tojson_ld }}
+</script>
+{% endblock %}
+{% block inhalt %}
+{% set hero = masse.get('hero_zaunbau-1400.webp', [1400, 933]) %}
+<section class="seitenkopf seitenkopf--bild">
+  <div class="wrap seitenkopf-inner">
+    <div>
+      <p class="eyebrow"><a href="{{ url('leistungen/') }}">Leistungen</a> · Zaunbau</p>
+      <h1>Zaunbau in {{ firma.ort }}, {{ orte[1] }} und dem {{ region }}.</h1>
+      <p class="lead">Doppelstabmattenzaun mit Tor, Pfosten einbetoniert oder auf L-Steinen. Wir messen aus, machen ein schriftliches Angebot und bauen mit eigenem Team und eigenem Bagger.</p>
+      {% include 'includes/kontaktknoepfe.html' %}
+    </div>
+    <img src="{{ asset('img/hero_zaunbau-1400.webp') }}" srcset="{{ asset('img/hero_zaunbau-800.webp') }} 800w, {{ asset('img/hero_zaunbau-1400.webp') }} 1400w" sizes="(min-width: 900px) 50vw, 100vw" width="{{ hero[0] }}" height="{{ hero[1] }}" alt="Minibagger und frisch gesetzte Zaunpfosten am Rand eines Rapsfelds" fetchpriority="high">
+  </div>
+</section>
+
+<section class="band band--grau" aria-labelledby="bauen-titel">
+  <div class="wrap">
+    <div class="band-kopf">
+      <p class="eyebrow">Was wir bauen</p>
+      <h2 id="bauen-titel">Der Zaun, der zu Ihrem Grundstück passt.</h2>
+    </div>
+    <div class="karten karten--4">
+      <div class="karte karte-text">
+        <h3>Doppelstabmattenzaun</h3>
+        <p>Der Standard für Grundstücksgrenzen: verzinkt und pulverbeschichtet, in Anthrazit oder Grün, in Höhen von der Beeteinfassung bis zum Sichtschutz. Hält Jahrzehnte ohne Pflege.</p>
+      </div>
+      <div class="karte karte-text">
+        <h3>Tore und Türen</h3>
+        <p>Gartentür und Einfahrtstor im gleichen Design wie der Zaun, ein- oder zweiflügelig. Wir setzen die Torpfosten mit eigenem Fundament, damit nichts nachgibt.</p>
+      </div>
+      <div class="karte karte-text">
+        <h3>Sichtschutz</h3>
+        <p>Sichtschutzstreifen zum Einflechten in die Matten oder geschlossene Elemente dort, wo Sie Ruhe vom Nachbarn oder von der Straße wollen.</p>
+      </div>
+      <div class="karte karte-text">
+        <h3>Zaun auf L-Steinen</h3>
+        <p>Liegt Ihr Grundstück höher oder tiefer als das Nachbargrundstück, setzen wir L-Steine und montieren den Zaun direkt darauf. Stützmauer und Zaun in einem Arbeitsgang.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="entsteht-titel">
+  <div class="wrap">
+    <div class="band-kopf">
+      <p class="eyebrow">So entsteht Ihr Zaun</p>
+      <h2 id="entsteht-titel">Vier Schritte, in dieser Reihenfolge.</h2>
+    </div>
+    <ol class="schritte">
+      <li class="schritt"><span class="schritt-nr" aria-hidden="true">1</span><h3>Aufmaß vor Ort</h3><p>Wir laufen die Grenze mit Ihnen ab, messen Länge und Höhenverlauf und prüfen, wo Tor und Tür sinnvoll sitzen.</p></li>
+      <li class="schritt"><span class="schritt-nr" aria-hidden="true">2</span><h3>Fundament</h3><p>Punktfundamente für jeden Pfosten oder L-Steine bei Höhenunterschieden. Den Aushub übernimmt unser Minibagger.</p></li>
+      <li class="schritt"><span class="schritt-nr" aria-hidden="true">3</span><h3>Pfosten setzen</h3><p>Pfosten ausrichten, einbetonieren oder auf den L-Stein dübeln, Flucht und Höhe mit der Latte prüfen.</p></li>
+      <li class="schritt"><span class="schritt-nr" aria-hidden="true">4</span><h3>Matten und Tore</h3><p>Matten einhängen, Tore einstellen, Baustelle aufräumen. Dann gehen wir alles gemeinsam mit Ihnen ab.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band band--grau" aria-labelledby="fotos-titel">
+  <div class="wrap">
+    <div class="band-kopf">
+      <p class="eyebrow">Aus der Galerie</p>
+      <h2 id="fotos-titel">Zäune, die wir gebaut haben.</h2>
+    </div>
+    <div class="raster raster--6">
+      {% for b in galerie if b.kat == 'zaun' %}{% if loop.index <= 6 %}
+      {% set m = masse.get('galerie/' ~ b.id ~ '-640.webp', [640, 480]) %}
+      <a class="raster-bild" href="{{ url('galerie/') }}#bild-{{ b.id }}">
+        <img src="{{ asset('img/galerie/' ~ b.id ~ '-640.webp') }}" width="{{ m[0] }}" height="{{ m[1] }}" alt="{{ b.alt }}" loading="lazy">
+      </a>
+      {% endif %}{% endfor %}
+    </div>
+    <p class="band-fuss"><a class="knopf knopf--hell" href="{{ url('galerie/') }}">Zur Galerie {{ icon('pfeil') }}</a></p>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="faq-titel">
+  <div class="wrap faq">
+    <div class="band-kopf">
+      <p class="eyebrow">Häufige Fragen</p>
+      <h2 id="faq-titel">Was Kunden uns vor dem Zaunbau fragen.</h2>
+    </div>
+    {% for f in zaun_faq %}
+    <details class="frage"{% if loop.first %} open{% endif %}>
+      <summary>{{ f.frage }}{{ icon('rechts') }}</summary>
+      <p>{{ f.antwort }}</p>
+    </details>
+    {% endfor %}
+  </div>
+</section>
+
+{% include 'includes/cta.html' %}
+{% endblock %}

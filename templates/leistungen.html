@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% from 'includes/icons.html' import icon %}
+{% block inhalt %}
+<section class="seitenkopf">
+  <div class="wrap">
+    <p class="eyebrow">Leistungen</p>
+    <h1>Vierzehn Leistungen. <span class="marker">Ein</span> Ansprechpartner.</h1>
+    <p class="lead">Vom Zaun über die Terrasse bis zum Kanalanschluss: Wir planen, graben, bauen und fahren den Rest ab. Sie müssen nichts koordinieren.</p>
+    <nav class="sprungleiste" aria-label="Zu den Bereichen">
+      {% for g in gruppen %}<a class="chip chip--link" href="#{{ g.slug }}">{{ g.titel }}</a>{% endfor %}
+    </nav>
+  </div>
+</section>
+
+{% for g in gruppen %}
+{% set m = masse.get('gruppen/' ~ g.slug ~ '.webp', [800, 533]) %}
+<section class="band leistungsgruppe{% if loop.index is even %} band--grau{% endif %}" id="{{ g.slug }}" aria-labelledby="{{ g.slug }}-titel">
+  <div class="wrap gruppe{% if loop.index is even %} gruppe--gespiegelt{% endif %}">
+    <div class="gruppe-bild">
+      <img src="{{ asset('img/gruppen/' ~ g.slug ~ '.webp') }}" width="{{ m[0] }}" height="{{ m[1] }}" alt="{{ g.titel }}: Foto von einer Baustelle von BLITZ-ZAUN" loading="lazy">
+    </div>
+    <div class="gruppe-text">
+      <h2 id="{{ g.slug }}-titel">{{ g.titel }}</h2>
+      <p class="lead">{{ g.kurz }}</p>
+      <div class="leistungsliste">
+        {% for l in g.leistungen %}
+        <article class="leistung">
+          <h3>{{ l.name }}</h3>
+          <p>{{ l.text }}</p>
+          {% if l.link is defined %}<a class="textlink" href="{{ url(l.link) }}">Mehr zum Zaunbau {{ icon('pfeil') }}</a>{% endif %}
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+<section class="band">
+  <div class="wrap hinweis">
+    <p>Sie vermissen etwas in der Liste? Fragen Sie einfach. Wir sagen Ihnen offen, ob wir es machen oder wer es besser kann.</p>
+  </div>
+</section>
+
+{% include 'includes/cta.html' %}
+{% endblock %}
