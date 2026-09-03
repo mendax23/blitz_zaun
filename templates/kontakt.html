@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% from 'includes/icons.html' import icon %}
+{% block inhalt %}
+<section class="seitenkopf">
+  <div class="wrap">
+    <p class="eyebrow">Kontakt</p>
+    <h1>Anrufen, schreiben oder <span class="marker">vorbeikommen</span>.</h1>
+    <p class="lead">Am schnellsten geht es telefonisch oder per WhatsApp. Schicken Sie gern ein, zwei Fotos vom Grundstück mit, dann können wir am Telefon schon einiges klären.</p>
+  </div>
+</section>
+
+<section class="band band--knapp">
+  <div class="wrap karten karten--3 kontaktwege">
+    <div class="karte karte-text">
+      <span class="karte-icon">{{ icon('telefon') }}</span>
+      <h2>Telefon</h2>
+      <p><a class="gross" href="tel:{{ firma.telefon_link }}">{{ firma.telefon }}</a><br><span class="leise">Büro</span></p>
+      <p><a class="gross" href="tel:{{ firma.mobil_link }}">{{ firma.mobil }}</a><br><span class="leise">Mobil, {{ team[1].name }}</span></p>
+    </div>
+    <div class="karte karte-text">
+      <span class="karte-icon karte-icon--whatsapp">{{ icon('whatsapp') }}</span>
+      <h2>WhatsApp</h2>
+      <p>Schreiben Sie uns, was ansteht, und hängen Sie Fotos an. Wir antworten von der Baustelle aus.</p>
+      <a class="knopf knopf--whatsapp" href="https://wa.me/{{ firma.whatsapp }}?text={{ 'Hallo, ich habe eine Anfrage an BLITZ-ZAUN:' | urlencode }}" target="_blank" rel="noopener">{{ icon('whatsapp') }}<span>Chat öffnen</span></a>
+    </div>
+    <div class="karte karte-text">
+      <span class="karte-icon">{{ icon('mail') }}</span>
+      <h2>E-Mail</h2>
+      <p>Für Pläne, Skizzen und alles, was Sie schriftlich haben möchten.</p>
+      <p><a class="gross" href="mailto:{{ firma.email }}">{{ firma.email }}</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="band band--grau" aria-labelledby="adresse-titel">
+  <div class="wrap adresse">
+    <div>
+      <p class="eyebrow">Adresse</p>
+      <h2 id="adresse-titel">{{ firma.name }} in {{ firma.ort }}</h2>
+      <address>
+        {{ firma.name }} {{ firma.zusatz }}<br>
+        {{ firma.inhaber }}<br>
+        {{ firma.strasse }}<br>
+        {{ firma.plz }} {{ firma.ort }}
+      </address>
+      <p><a class="knopf knopf--hell" href="{{ firma.maps_link }}" target="_blank" rel="noopener">{{ icon('pin') }}<span>Route in Google Maps öffnen</span></a></p>
+      <p class="leise">Der Link öffnet Google Maps. Erst dann werden Daten an Google übertragen, auf unserer Seite ist keine Karte eingebettet.</p>
+    </div>
+    <div class="hinweis-karte">
+      <h3>Kein Kontaktformular?</h3>
+      <p>Richtig. Ihre Nachricht kommt per WhatsApp oder E-Mail direkt bei uns an, ohne Umweg über einen Server und ohne dass Sie ein Formular ausfüllen müssen. Und wir sehen Ihre Fotos in voller Größe.</p>
+      <p>Wir arbeiten für {{ orte[:5] | join(', ') }} und den ganzen {{ region }}.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

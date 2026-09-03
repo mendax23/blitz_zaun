@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% from 'includes/icons.html' import icon %}
+{% block inhalt %}
+{% set hero = masse.get('ueber_uns-1400.webp', [1400, 933]) %}
+<section class="seitenkopf seitenkopf--bild">
+  <div class="wrap seitenkopf-inner">
+    <div>
+      <p class="eyebrow">Über uns</p>
+      <h1>Ein Familienbetrieb aus {{ firma.ort }}.</h1>
+      <p class="lead">Garten- und Landschaftsbau ist seit vielen Jahren unser Einsatzgebiet. Die meisten neuen Kunden kommen auf Empfehlung, und so soll es bleiben: mit fairen Angeboten, gehaltenen Terminen und Arbeit, die man auch nach Jahren noch gern anschaut.</p>
+    </div>
+    <img src="{{ asset('img/ueber_uns-1400.webp') }}" srcset="{{ asset('img/ueber_uns-800.webp') }} 800w, {{ asset('img/ueber_uns-1400.webp') }} 1400w" sizes="(min-width: 900px) 50vw, 100vw" width="{{ hero[0] }}" height="{{ hero[1] }}" alt="Zwei Mitarbeiter von BLITZ-ZAUN richten Zaunpfosten auf L-Steinen aus" fetchpriority="high">
+  </div>
+</section>
+
+<section class="band band--grau" aria-labelledby="team-titel">
+  <div class="wrap">
+    <div class="band-kopf">
+      <p class="eyebrow">Ansprechpartner</p>
+      <h2 id="team-titel">Wer Sie berät und wer baut.</h2>
+    </div>
+    <div class="team">
+      {% for p in team %}
+      <div class="person">
+        <img src="{{ asset('img/team/' ~ p.bild ~ '.webp') }}" width="300" height="300" alt="{{ p.name }}, {{ p.rolle }}" loading="lazy">
+        <div>
+          <h3>{{ p.name }}</h3>
+          <p>{{ p.rolle }}</p>
+          {% if p.mobil is defined %}<a class="textlink" href="tel:{{ firma.mobil_link }}">{{ icon('telefon') }}<span>{{ firma.mobil }}</span></a>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="werte-titel">
+  <div class="wrap">
+    <div class="band-kopf">
+      <p class="eyebrow">Woran Sie uns erkennen</p>
+      <h2 id="werte-titel">Drei Dinge, auf die Sie sich verlassen können.</h2>
+    </div>
+    <div class="karten karten--3">
+      <div class="karte karte-text">
+        <h3>Ein Angebot, das gilt</h3>
+        <p>Erst die Besichtigung, dann ein schriftliches Angebot mit allen Positionen. Was nicht drinsteht, wird auch nicht berechnet.</p>
+      </div>
+      <div class="karte karte-text">
+        <h3>Eigenes Gerät</h3>
+        <p>Bagger, Kipper und Container gehören uns. Wir warten nicht auf Vermieter oder Subunternehmer und können deshalb Termine halten.</p>
+      </div>
+      <div class="karte karte-text">
+        <h3>Ein Ansprechpartner</h3>
+        <p>Die Projektleitung bleibt von der Besichtigung bis zur Abnahme dieselbe Person. Sie erklären Ihr Anliegen einmal, nicht dreimal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--dunkel" aria-labelledby="fuhrpark-titel">
+  <div class="wrap">
+    <div class="band-kopf">
+      <p class="eyebrow eyebrow--hell">Fuhrpark</p>
+      <h2 id="fuhrpark-titel">Drei Bagger. Drei LKW.</h2>
+      <p class="lead">Vom Minibagger, der durch die Gartenpforte passt, bis zum Abrollkipper für Container und Aushub.</p>
+    </div>
+    {% for art in ['Bagger', 'LKW'] %}
+    <h3 class="fuhrpark-art">{{ art }}</h3>
+    <ul class="fuhrpark">
+      {% for f in fuhrpark if f.art == art %}
+      <li class="fahrzeug">
+        <img src="{{ asset('img/fuhrpark/' ~ f.bild ~ '.webp') }}" width="300" height="300" alt="{{ f.name }} von BLITZ-ZAUN" loading="lazy">
+        <div>
+          <h4>{{ f.name }}</h4>
+          <p>{{ f.text }}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
+  </div>
+</section>
+
+{% include 'includes/cta.html' %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% from 'includes/icons.html' import icon %}
+{% block inhalt %}
+<section class="seitenkopf">
+  <div class="wrap">
+    <p class="eyebrow">Galerie</p>
+    <h1>Unsere Baustellen. <span class="marker">Ungeschönt.</span></h1>
+    <p class="lead">Zäune, L-Steine, Pflaster, Erdarbeiten und die Maschinen dazu. Alle Fotos stammen von unseren eigenen Einsätzen in der Region.</p>
+    <div class="filter" role="group" aria-label="Fotos filtern">
+      <button type="button" class="chip chip--knopf" data-filter="alle" aria-pressed="true">Alle</button>
+      {% for k, name in kategorien.items() %}<button type="button" class="chip chip--knopf" data-filter="{{ k }}" aria-pressed="false">{{ name }}</button>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="band band--knapp">
+  <div class="wrap">
+    <div class="raster raster--galerie" id="galerie">
+      {% for b in galerie %}
+      {% set m = masse.get('galerie/' ~ b.id ~ '-640.webp', [640, 480]) %}
+      {% set g = masse.get('galerie/' ~ b.id ~ '-1600.webp', [1600, 1200]) %}
+      <figure class="raster-bild" data-kat="{{ b.kat }}" id="bild-{{ b.id }}">
+        <a class="galerie-link" href="{{ asset('img/galerie/' ~ b.id ~ '-1600.webp') }}" data-breite="{{ g[0] }}" data-hoehe="{{ g[1] }}" data-alt="{{ b.alt }}" data-kategorie="{{ kategorien[b.kat] }}">
+          <img src="{{ asset('img/galerie/' ~ b.id ~ '-640.webp') }}" width="{{ m[0] }}" height="{{ m[1] }}" alt="{{ b.alt }}" loading="lazy">
+        </a>
+        <figcaption>{{ kategorien[b.kat] }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+    <p class="filter-leer" hidden>In dieser Kategorie gibt es noch keine Fotos.</p>
+  </div>
+</section>
+
+<dialog class="lightbox" id="lightbox" aria-label="Foto in groß">
+  <button type="button" class="lightbox-schliessen" data-lb="schliessen" aria-label="Schließen">{{ icon('x') }}</button>
+  <button type="button" class="lightbox-pfeil lightbox-pfeil--links" data-lb="zurueck" aria-label="Vorheriges Foto">{{ icon('links') }}</button>
+  <figure>
+    <img src="" alt="" width="1600" height="1200">
+    <figcaption><span class="lightbox-kat"></span><span class="lightbox-text"></span><span class="lightbox-zaehler"></span></figcaption>
+  </figure>
+  <button type="button" class="lightbox-pfeil lightbox-pfeil--rechts" data-lb="weiter" aria-label="Nächstes Foto">{{ icon('rechts') }}</button>
+</dialog>
+
+{% include 'includes/cta.html' %}
+{% endblock %}
