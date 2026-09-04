@@ -5,8 +5,7 @@ Statische Seite: Jinja2-Templates werden per `build.py` nach `dist/` gerendert u
 über GitHub Actions auf GitHub Pages veröffentlicht. Kein Server, keine Datenbank,
 keine Kosten außer der Domain.
 
-Vorschau: https://mendax23.github.io/blitz_zaun/ (bis zum Domain-Umzug, siehe unten)
-Ziel: https://blitz-zaun.de
+Adresse: https://blitz-zaun.de (noindex, bis der Kunde die Inhalte freigibt; dann `BLITZ_PREVIEW` im Workflow auf "0")
 
 ---
 
@@ -116,9 +115,8 @@ was nicht mehr funktioniert (TLS-Fehler). Für den Umzug:
    - Frame-Weiterleitung bei Strato löschen. MX-Records (Mail) unverändert lassen.
 2. **GitHub, Repo-Einstellungen → Pages:** Custom domain `blitz-zaun.de` eintragen,
    nach der DNS-Prüfung „Enforce HTTPS" aktivieren.
-3. **Workflow umstellen** (`.github/workflows/deploy.yml`, Block `env`):
-   `BLITZ_SITE_URL: https://blitz-zaun.de`, `BLITZ_BASE_PATH: ""`, `BLITZ_PREVIEW: "0"`,
-   `BLITZ_DOMAIN: blitz-zaun.de`. Push → die Seite ist live, indexierbar, mit Sitemap.
+3. **Workflow** (`.github/workflows/deploy.yml`, Block `env`) steht seit dem 04.09.2026 auf der
+   eigenen Domain. Nach der Inhaltsfreigabe `BLITZ_PREVIEW: "0"` setzen → indexierbar, mit Sitemap.
 4. **Jimdo-Seite löschen** oder wenigstens offline nehmen, sonst doppelter Inhalt.
 5. Search Console und Unternehmensprofil (siehe SEO).
 

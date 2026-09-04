@@ -14,18 +14,14 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
-# Vorschau-Modus, solange blitz-zaun.de noch auf Strato/Jimdo zeigt:
-# Seite liegt unter https://mendax23.github.io/blitz_zaun/, noindex, robots sperrt.
-# Für den Livegang die drei Variablen unten austauschen (siehe README, Abschnitt Domain-Umzug).
+# Eigene Domain: die Seite läuft unter https://blitz-zaun.de (CNAME wird beim Deploy geschrieben).
+# BLITZ_PREVIEW "1" hält sie auf noindex, bis der Kunde Fotos und Texte freigegeben hat.
+# Freigabe erteilt → BLITZ_PREVIEW auf "0", dann Sitemap einreichen (README, Abschnitt SEO).
 env:
-  BLITZ_SITE_URL: https://mendax23.github.io
-  BLITZ_BASE_PATH: /blitz_zaun
+  BLITZ_SITE_URL: https://blitz-zaun.de
+  BLITZ_BASE_PATH: ""
   BLITZ_PREVIEW: "1"
-  # Livegang:
-  # BLITZ_SITE_URL: https://blitz-zaun.de
-  # BLITZ_BASE_PATH: ""
-  # BLITZ_PREVIEW: "0"
-  # BLITZ_DOMAIN: blitz-zaun.de
+  BLITZ_DOMAIN: blitz-zaun.de
 
 jobs:
   bauen:
