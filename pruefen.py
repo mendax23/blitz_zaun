@@ -10,7 +10,8 @@ from pathlib import Path
 WURZEL = Path(__file__).resolve().parent
 DIST = WURZEL / "dist"
 BASE_PATH = os.environ.get("BLITZ_BASE_PATH", "").rstrip("/")
-VERBOTEN = ["{{", "{%", "[bitte", "Lorem ipsum", "TODO", "PLATZHALTER", "lorem"]
+VERBOTEN = ["{{", "{%", "[bitte", "Lorem ipsum", "TODO", "PLATZHALTER", "lorem",
+            "0 61 83", "6183898811", "06183"]  # Festnetz ist abgeschaltet
 fehler: list[str] = []
 
 

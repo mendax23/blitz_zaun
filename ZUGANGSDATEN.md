@@ -32,10 +32,11 @@ Keine Passwörter in diese Datei. Hier steht nur, was wo liegt und was noch fehl
 ## Was der Kunde liefern oder bestätigen muss
 
 - [ ] **Freigabe der Fotos.** Alle Bilder stammen von Studio Seikel (2016). Der Kunde muss bestätigen, dass die Nutzungsrechte bei ihm liegen und die Fotos weiterverwendet werden dürfen.
-- [ ] **Inhalte prüfen.** Leistungen, Team (Murat Bayram Inhaber, Cevdet Bayram Projektleitung, mobil 0163 57 23 771), Fuhrpark (3 Bagger, 3 LKW) stammen von der alten Seite und sind zehn Jahre alt.
+- [ ] **Inhalte prüfen.** Leistungen, Team (Murat Bayram Inhaber, Cevdet Bayram Projektleitung, mobil 0163 57 23 771; wem 0157 73513695 gehört, ist nicht gesagt), Fuhrpark (3 Bagger, 3 LKW) stammen von der alten Seite und sind zehn Jahre alt.
 - [ ] **Steuernummer** 22 804 61 638 (Finanzamt Hanau) bestätigen. Falls eine USt-IdNr. existiert, ins Impressum.
 - [ ] **E-Mail** info@blitz-zaun.de: wird das Postfach noch gelesen?
-- [ ] **Fax** 0 61 83 89 88 12: noch in Betrieb? Sonst aus dem Impressum nehmen.
+- [ ] **WhatsApp** läuft auf 0163 5723771 (wie auf der alten Seite). Falls sie auf 0157 soll: `whatsapp` in `inhalt/daten.py` ändern.
+- [x] **Festnetz und Fax** 06183 898811/12 sind abgeschaltet (Kunde am 04.09.2026). Auf der Seite stehen nur noch 0157 73513695 und 0163 5723771. In Branchenverzeichnissen (Gelbe Seiten, gartenbau.org, landschaftsbau.net) steht noch die alte Nummer – dort ändern lassen.
 - [ ] **Öffnungs-/Erreichbarkeitszeiten**, falls gewünscht (fehlen bislang komplett).
 - [ ] **Strato-Zugang oder DNS-Änderung** für den Domain-Umzug (Schritte in README.md).
 - [ ] **Google-Unternehmensprofil**: existiert eines? Zugang?

@@ -47,7 +47,7 @@ SEITEN = [
      "beschreibung": "BLITZ-ZAUN ist ein Familienbetrieb aus Erlensee. Murat Bayram und Cevdet Bayram planen und bauen mit eigenem Team, drei Baggern und drei LKW."},
     {"pfad": "kontakt/", "template": "kontakt.html",
      "titel": "Kontakt: Anrufen oder per WhatsApp schreiben",
-     "beschreibung": "BLITZ-ZAUN, Leipziger Straße 4, 63526 Erlensee. Telefon 0 61 83 89 88 11, mobil und WhatsApp 0163 57 23 771."},
+     "beschreibung": "BLITZ-ZAUN, Leipziger Straße 4, 63526 Erlensee. Telefon 0157 73 51 36 95, WhatsApp 0163 57 23 771."},
     {"pfad": "impressum/", "template": "impressum.html", "titel": "Impressum", "beschreibung": "Anbieterkennzeichnung von BLITZ-ZAUN, Murat Bayram, Erlensee.", "noindex": True},
     {"pfad": "datenschutz/", "template": "datenschutz.html", "titel": "Datenschutzerklärung", "beschreibung": "Datenschutzerklärung der Website blitz-zaun.de.", "noindex": True},
     {"pfad": "404.html", "template": "404.html", "titel": "Seite nicht gefunden", "beschreibung": "Diese Seite gibt es nicht.", "noindex": True, "datei": True},
